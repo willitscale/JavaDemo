@@ -1,0 +1,58 @@
+plugins {
+    id 'java-library'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+    implementation 'biz.paluch.logging:logstash-gelf:1.15.0'
+
+    implementation 'joda-time:joda-time:2.10.13'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.google.guava:guava:31.1-jre'
+
+    implementation 'com.rabbitmq:amqp-client:5.14.2'
+
+    implementation 'org.jasypt:jasypt:1.9.3'
+
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.4'
+
+    implementation 'org.springframework:spring-core:5.3.16'
+    implementation 'org.springframework:spring-context:5.3.16'
+    implementation 'org.springframework:spring-beans:5.3.16'
+
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.4'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb:2.6.4'
+
+    implementation 'org.mongodb:mongo-java-driver:3.12.10'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+
+    testImplementation 'junit:junit:4.13.2'
+
+    testImplementation 'org.hamcrest:hamcrest-core:2.2'
+
+    testImplementation 'org.mockito:mockito-all:1.10.19'
+
+    testImplementation 'org.springframework:spring-test:5.3.16'
+    testImplementation 'org.springframework.boot:spring-boot-test:2.6.4'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+
+// Spring boot by default forces slf4j and we're using log4j2
+configurations {
+    all*.exclude group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j'
+}
+
